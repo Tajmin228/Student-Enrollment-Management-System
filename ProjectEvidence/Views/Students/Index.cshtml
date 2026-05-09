@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Student>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col">
+        <h2 class="display-4">Student List</h2>
+        <div class="d-flex justify-content-end">
+            <a asp-action="Create" asp-controller="Students" class="btn btn-outline-primary btn-sm mb-2">Add New Student</a>
+        </div>
+        @foreach (var c in Model)
+        {
+            <div class="card mb-2 ">
+                <div class="card-header d-flex justify-content-between">
+                    <div>
+                        <img src="@c.Picture" width="32" class="rounded-2"/>
+                        <label class="me-2"><b>Student Name :</b>@Html.DisplayFor(xx => c.StudentName)</label>
+                        <label class="me-2"><b>Birth Date :</b>@Html.DisplayFor(xx => c.BirthDate)</label>
+                        <label class="me-2"><b>Age :</b>@Html.DisplayFor(xx => c.Age)</label>
+                        <label class="me-2"><b>Marital Status :</b>@Html.DisplayFor(xx => c.MaritalStatus)</label>
+                    </div>
+                    <div>
+                        <a asp-action="Edit" asp-controller="Students" asp-route-id="@c.StudentID" class="btn btn-outline-success btn-sm mb-2">Edit</a>
+                        <a asp-action="Delete" asp-controller="Students" asp-route-id="@c.StudentID" class="btn btn-outline-danger btn-sm mb-2">Delete</a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped table-sm">
+                        <thead class="table-info">
+                            <tr>
+                                <th>Course Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in c.Enrollments)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(xx=>item.Cours.Title)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+</div>
